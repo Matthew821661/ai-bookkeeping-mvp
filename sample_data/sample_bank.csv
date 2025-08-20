@@ -1,11 +1,4 @@
-date,description,amount,reference
-2025-07-01,POS SHOPRITE CAPE TOWN,-350.50,TXN001
-2025-07-02,Monthly Bank Charges,-89.99,TXN002
-2025-07-03,Payment from Client ABC,2500.00,TXN003
-2025-07-04,Shell Fuel Station,-650.00,TXN004
-2025-07-05,Interest Received,15.75,TXN005
-2025-07-06,Salary Payment,-12000.00,TXN006
-2025-07-07,Repairs and maintenance,-800.00,TXN007
-2025-07-08,Data Bundle Vodacom,-299.00,TXN008
-2025-07-09,Office Paper and Ink,-450.25,TXN009
-2025-07-10,Rent for July,-5000.00,TXN010
+date,description,amount
+2025-01-01,Opening Balance,1000
+2025-01-05,Deposit,500
+2025-01-10,Withdrawal,-200

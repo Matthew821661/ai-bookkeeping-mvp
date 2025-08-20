@@ -1,4 +1,3 @@
-date,description,amount,reference,vat_code
-2025-07-02,Invoice #1001 - Goods sold to XYZ,3500.00,INV1001,STD
-2025-07-05,Invoice #1002 - Zero-rated export,2000.00,INV1002,ZERO
-2025-07-06,Interest income (exempt),150.00,INV1003,EXEMPT
+invoice_no,date,customer,amount,vat
+INV001,2025-01-03,Customer A,1150,150
+INV002,2025-01-07,Customer B,2300,300
