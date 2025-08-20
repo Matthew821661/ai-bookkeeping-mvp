@@ -1,0 +1,11 @@
+description,amount,expected_account_code,expected_vat_code
+Monthly Bank Charges,-89.99,5100,STD
+Shell Fuel Station,-650.00,5110,STD
+Repairs and maintenance,-800.00,5120,STD
+Data Bundle Vodacom,-299.00,5130,STD
+Office Paper and Ink,-450.25,5140,STD
+Rent for July,-5000.00,5150,STD
+Salary Payment,-12000.00,5160,STD
+Payment from Client ABC,2500.00,4000,STD
+Interest Received,15.75,4020,EXEMPT
+POS SHOPRITE CAPE TOWN,-350.50,5000,STD
