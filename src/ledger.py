@@ -1,6 +1,6 @@
 from __future__ import annotations
 import pandas as pd
-from typing import List, Optional
+from typing import List
 from dataclasses import dataclass
 from .models import JournalEntry
 from .chart_of_accounts import CODE_TO_ACCOUNT
@@ -44,11 +44,9 @@ def post_double_entry(state: LedgerState, date, debit_acc, credit_acc, amount, m
 def trial_balance(state: LedgerState) -> pd.DataFrame:
     df = state.to_dataframe()
     if df.empty:
-        return pd.DataFrame(columns=["account_code","account_name","type","debit","credit"])
+        return pd.DataFrame(columns=["account_code","account_name","type","TB_Debit","TB_Credit"])
     tb = df.groupby(["account_code","account_name","type"], as_index=False)[["debit","credit"]].sum()
-    # Present as per accounting convention
     tb["balance"] = tb["debit"] - tb["credit"]
-    # Split into debit/credit columns for presentation
     tb["TB_Debit"] = tb["balance"].apply(lambda x: x if x > 0 else 0.0)
     tb["TB_Credit"] = tb["balance"].apply(lambda x: -x if x < 0 else 0.0)
     return tb[["account_code","account_name","type","TB_Debit","TB_Credit"]].sort_values("account_code")

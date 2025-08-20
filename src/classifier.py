@@ -1,8 +1,7 @@
 import re
-from typing import Tuple, Dict, Any
+from typing import Tuple
 from .chart_of_accounts import NAME_TO_CODE
 
-# Simple heuristics to bootstrap classification
 KEYWORD_TO_ACCOUNT = {
     r"\b(bank\s?charges|monthly\s?fee|service\s?fee)\b": "Bank Charges",
     r"\b(fuel|garage|shell|total|engen|bp)\b": "Fuel Expense",
@@ -18,29 +17,18 @@ KEYWORD_TO_ACCOUNT = {
 }
 
 def classify(description: str, amount: float) -> Tuple[int, str, float, str]:
-    """
-    Returns (account_code, vat_code, confidence, reason)
-    amount > 0 = inflow (likely income, debtor receipt, etc.)
-    amount < 0 = outflow (expense, supplier, etc.)
-    """
     desc = (description or "").lower()
-
-    # Interest Received (often positive)
     if "interest" in desc and amount > 0:
         return NAME_TO_CODE["interest received"], "EXEMPT", 0.95, "Keyword match: interest received (exempt)"
-
     for pattern, account_name in KEYWORD_TO_ACCOUNT.items():
         if re.search(pattern, desc):
-            # VAT defaults: expenses STD, revenue STD unless keyword signals EXEMPT
             vat_code = "STD"
             if account_name == "Interest Received":
                 vat_code = "EXEMPT"
             if amount > 0 and account_name == "Sales Revenue":
                 vat_code = "STD"
             code = NAME_TO_CODE[account_name.lower()]
-            return code, vat_code, 0.75, f"Heuristic '{pattern}' → {account_name}"
-
-    # Fallbacks by sign
+            return code, vat_code, 0.75, f"Heuristic match → {account_name}"
     if amount > 0:
         return NAME_TO_CODE["sales revenue"], "STD", 0.55, "Fallback: positive amount assumed revenue"
     else:

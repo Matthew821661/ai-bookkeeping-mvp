@@ -2,23 +2,23 @@ import os, sqlite3
 from typing import Any, Dict, List
 from datetime import datetime
 
-DB_PATH = os.environ.get("BOOKKEEPING_DB_PATH", "bookkeeping.db")
+DB_PATH = os.environ.get("BOOKKEEPING_DB_PATH","bookkeeping.db")
 
 SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS journals (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    jdate TEXT NOT NULL,
-    account_code INTEGER NOT NULL,
-    debit REAL NOT NULL,
-    credit REAL NOT NULL,
-    memo TEXT,
-    vat_code TEXT,
-    vat_amount REAL,
-    link_ref TEXT,
-    created_by TEXT,
-    confidence REAL,
-    reason TEXT,
-    created_at TEXT NOT NULL
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ jdate TEXT NOT NULL,
+ account_code INTEGER NOT NULL,
+ debit REAL NOT NULL,
+ credit REAL NOT NULL,
+ memo TEXT,
+ vat_code TEXT,
+ vat_amount REAL,
+ link_ref TEXT,
+ created_by TEXT,
+ confidence REAL,
+ reason TEXT,
+ created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_journal_date ON journals(jdate);
 """
@@ -37,9 +37,9 @@ def save_journal_rows(rows: List[Dict[str, Any]]):
         cur = conn.cursor()
         for r in rows:
             cur.execute("""
-                INSERT INTO journals (jdate, account_code, debit, credit, memo, vat_code, vat_amount, link_ref, created_by, confidence, reason, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
+INSERT INTO journals (jdate, account_code, debit, credit, memo, vat_code, vat_amount, link_ref, created_by, confidence, reason, created_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+""", (
                 str(r.get("date")),
                 int(r["account_code"]),
                 float(r.get("debit",0.0)),
