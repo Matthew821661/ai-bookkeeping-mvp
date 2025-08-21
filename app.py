@@ -4,7 +4,7 @@ from src import ocr, classifier
 from src.ledger import LedgerState, post_double_entry, trial_balance, reset
 from src.chart_of_accounts import CHART
 
-st.set_page_config(page_title="AI Bookkeeping v1.4 (OCR)", layout="wide")
+st.set_page_config(page_title="AI Bookkeeping v1.4", layout="wide")
 
 if "ledger" not in st.session_state:
     st.session_state.ledger = LedgerState(journals=[])
