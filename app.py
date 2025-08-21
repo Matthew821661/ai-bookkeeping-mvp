@@ -15,7 +15,7 @@ if "inv_df" not in st.session_state:
 if "sugg_df" not in st.session_state:
     st.session_state.sugg_df = pd.DataFrame(columns=["date","description","amount","suggested_account","vat_code","confidence","reason","link_ref"])
 
-st.title("📚 AI SaaS Bookkeeping (v1.4 — OCR)")
+st.title("📚 AI SaaS Bookkeeping")
 st.caption("Upload (CSV/Excel/PDF digital or scanned) → AI classify → Human review → Post to GL → Trial Balance → Export")
 
 st.sidebar.header("Settings")
