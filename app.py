@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from src import ocr, classifier
+from app.services import invoice_parser, classifier
 from src.ledger import LedgerState, post_double_entry, trial_balance, reset
 from src.chart_of_accounts import CHART
 
